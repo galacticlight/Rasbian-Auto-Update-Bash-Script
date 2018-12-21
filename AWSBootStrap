@@ -1,0 +1,6 @@
+#!/bin/bash
+yum update -y
+sudo yum install -y perl-Switch perl-DateTime perl-Sys-Syslog perl-LWP-Protocol-https perl-Digest-SHA.x86_64
+cd /home/ec2-user/
+curl https://s3.amazonaws.com/mac.pack/harden.sh
+# cd /home/ec2-user/
