@@ -2,6 +2,14 @@
 yum update -y
 sudo yum install -y perl-Switch perl-DateTime perl-Sys-Syslog perl-LWP-Protocol-https perl-Digest-SHA.x86_64
 cd /home/ec2-user/
-# The command below will download the specified file from the S3 bucket
-# File left as an example for security purposes.
-#curl https://s3.amazonaws.com/examplefile.txt -O
+mkdir awsScripts
+curl https://s3.amazonaws.com/mac.pack/CloudWatchMonitoringScripts-1.2.1.zip -O
+unzip CloudWatchMonitoringScripts-1
+rm CloudWatchMonitoringScripts-1
+# Verifying System Memory Utilization Metrics.
+# No Actuall metrics will be sent to CloudWatch.
+sudo aws-scripts-mon/mon-put-instance-data.pl --mem-util --verify --verbose
+# Actually sending System Memory metrics to CloudWatch
+# And Writting Reference ID to a text file. 
+sudo aws-scripts-mon/mon-put-instance-data.pl --mem-util --mem-used --mem-avail >> referenceID-Mem-Metrics
+# cd /home/ec2-user/
